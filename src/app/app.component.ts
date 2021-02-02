@@ -20,14 +20,14 @@ export class AppComponent {
     answer: 'Answer 2',
     show: false,
     id: getRandomNumber(),
-  } {
+  }, {
     question: 'Question 3',
     answer: 'Answer 3',
     show: false,
     id: getRandomNumber(),
   }];
 
-  trackByFlashId(index, flash) {
+  trackByFlashId(index: any, flash: any) {
     return flash.id;
   }
 }
