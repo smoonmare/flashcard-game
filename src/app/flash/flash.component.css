@@ -7,3 +7,8 @@
 .card-header {
   cursor: pointer;
 }
+
+.flashs {
+  display: flex;
+  flex-wrap: wrap;
+}
