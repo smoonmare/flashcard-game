@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FlashService } from './flash.service';
 import { FlashComponent } from './flash/flash.component';
 
 @NgModule({
@@ -16,7 +17,7 @@ import { FlashComponent } from './flash/flash.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [FlashService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

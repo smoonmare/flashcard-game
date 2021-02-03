@@ -1,14 +1,14 @@
 <form #flashForm="ngForm">
-  <h1 class="is-size-3">Add New Flash Card</h1>
-  <div class="field">
-    <label class="label" for="">Question</label>
+	<h1 class="is-size-3">{{ editing ? 'Edit': 'Add New' }} Flash Card</h1>
+	<div class="field">
+		<label class="label" for="">Question</label>
     <div class="control">
-      <input required class="input"
-      type="text"
-      name="question"
-      #question
-      [(ngModel)]="flash.question"
-      [ngClass]="{ 'is-danger': question.invalid && !question.pristine }">>
+      <input
+      required class="input"
+      type="text" name="question"
+      #questionEl="ngModel"
+      [ngClass]="{'is-danger': questionEl.invalid && !questionEl.pristine}"
+      [(ngModel)]="flash.question">
     </div>
   </div>
   <div class="field">
@@ -16,11 +16,10 @@
     <div class="control">
       <input
       required class="input"
-      type="text"
-      name="answer"
-      #answer
-      [(ngModel)]="flash.answer"
-      [ngClass]="{ 'is-danger': answer.invalid && !answer.pristine }">
+      type="text" name="answer"
+      #answerEl="ngModel"
+      [ngClass]="{'is-danger': answerEl.invalid && !answerEl.pristine}"
+      [(ngModel)]="flash.answer">
     </div>
   </div>
   <button
@@ -41,17 +40,16 @@
   class="button clear-btn"
   (click)="handleCancel()">Cancel</button>
   <ng-template #clearBtn>
-    <button class="button clear-btn"
-    (click)="handleClear()">Clear</button>
+    <button class="button clear-btn" (click)="handleClear()">Clear</button>
   </ng-template>
 </form>
-<div class="flashs">
+<div class="flashs" *ngIf="flashs$ | async as flashs">
   <app-flash
     *ngFor="let flash of flashs; trackBy trackByFlashId"
     [flash]="flash"
-    (onToggleCard)="handleToggleCard($event)"
-    (onDelete)="handleDelete($event)"
-    (onEdit)="handleEdit($event)"
-    (onRememberedChange)="handleRemeberedChange($event)"
+    (toggleCard)="handleToggleCard($event)"
+    (delete)="handleDelete($event)"
+    (edit)="handleEdit($event)"
+    (rememberedChange)="handleRememberedChange($event)"
   ></app-flash>
 </div>
