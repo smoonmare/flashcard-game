@@ -27,7 +27,36 @@ export class AppComponent {
     id: getRandomNumber(),
   }];
 
-  trackByFlashId(index: any, flash: any) {
+  editing = false;
+  editingId: number | undefined;
+
+  trackByFlashId(index: number, flash: any): number {
     return flash.id;
   }
+
+  handleToggleCard(id: number): any {
+    const flash = this.flashs.find((flash) => flash.id === id);
+    if (flash) {
+      flash.show = !flash.show;
+    }
+  }
+
+  handleDelete(id: number) {
+    const flashId = this.flashs.findIndex(flash => flash.id === id);
+    this.flashs.splice(flashId, 1);
+  }
+
+  handleEdit(id: number) {
+    this.editing = true;
+    this.editingId = id;
+    // TODO: We will add editing logic after adding the form
+  }
+
+  handleRemeberedChange({id, flag}: {id: number, flag: string}) {
+    const flash = this.flashs.find((flash) => flash.id === id);
+    if (flash) {
+      flash.remembered = flag;
+    }
+    }
+
 }
